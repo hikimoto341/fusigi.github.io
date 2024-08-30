@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クイズ</title>
+    <style>
+        body {
+            background-color: #E7E1DA;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-y: scroll; z
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+            padding-bottom: 20px; /* カードの切れを防ぐための下パディング */
+        }
+        .kado {
+            position: absolute;
+            width: 120px;
+            height: auto;
+        }
+        .kado-top-right {
+            top: -20px;
+            right: -40px;
+            transform: rotate(180deg);
+        }
+        .kado-bottom-left {
+            bottom: -20px;
+            left: -40px;
+            transform: rotate(0deg); /* 左下の花の回転角度 */
+        }
+        .tate {
+            width: 30px;
+            position: absolute;
+            top: 90px;
+            left: -60px;
+            height: auto;
+        }
+        .title {
+            width: 60%;
+            margin: 20px auto;
+        }
+        .usagi {
+            width: 60px;
+            height: auto;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .card {
+            width: 60px;
+            height: auto;
+            display: inline-block;
+            vertical-align: middle;
+            margin-bottom: 20px; /* カードの切れを防ぐための下マージン */
+        }
+        .hint-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 70px;
+            gap: 10px;
+        }
+        .hint-card {
+            width: 100px;
+            height: 140px;
+            perspective: 1000px;
+        }
+        .hint-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        .hint-card-inner.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .hint-front, .hint-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+        .hint-front {
+            background-image: url('hint.png');
+            background-size: cover;
+        }
+        .hint-back {
+            background-color: #A792B6;
+            color: white;
+            font-size: 20px;
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hint-text {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        button {
+            background-color: #A792B6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="kado.png" alt="花の模様" class="kado kado-top-right">
+        <img src="tate.png" alt="模様" class="tate">
+        <img src="title.png" alt="第一関門" class="title">
+        <input type="text" placeholder="答えを入力してください">
+        <br>
+        <img src="usagi.png" alt="ウサギ" class="usagi">
+        <button>送信</button>
+        <img src="card.png" alt="カード" class="card">
+        <div class="hint-container">
+            <div class="hint-card" onclick="flipCard(this)">
+                <div class="hint-card-inner">
+                    <div class="hint-front"></div>
+                    <div class="hint-back">ヒント1</div>
+                </div>
+            </div>
+            <div class="hint-card" onclick="flipCard(this)">
+                <div class="hint-card-inner">
+                    <div class="hint-front"></div>
+                    <div class="hint-back">ヒント2</div>
+                </div>
+            </div>
+        </div>
+        <div class="hint-text">
+            <p>ヒント1</p>
+            <p>ヒント2</p>
+        </div>
+        <img src="kado.png" alt="花の模様" class="kado kado-bottom-left">
+    </div>
+
+    <script>
+        function flipCard(element) {
+            element.querySelector('.hint-card-inner').classList.toggle('is-flipped');
+        }
+    </script>
+</body>
+</html>
